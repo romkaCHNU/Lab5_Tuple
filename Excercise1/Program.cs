@@ -25,7 +25,7 @@ namespace Excercise1
             MyFrac f = new MyFrac(num, denom);
             Console.WriteLine("MyFracToString: " + MyFracToString(f));
             Console.WriteLine("Normalized: " + MyFracToString(Normalize(f)));
-            Console.WriteLine("With Int Part: " + ToStringWithIntPart(new MyFrac(17, 7)));
+            Console.WriteLine("With Int Part: " + ToStringWithIntPart(f));
             Console.WriteLine("Double Value: " + DoubleValue(f));
 
             Console.Write("Чисельник 2 числа: ");
