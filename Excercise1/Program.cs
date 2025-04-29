@@ -18,25 +18,33 @@ namespace Excercise1
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            Console.Write("Чисельник 1 числа: ");
-            long num = long.Parse(Console.ReadLine());
-            Console.Write("Знаменник 1 числа: ");
-            long denom = long.Parse(Console.ReadLine());
-            MyFrac f = new MyFrac(num, denom);
-            Console.WriteLine("MyFracToString: " + MyFracToString(f));
-            Console.WriteLine("Normalized: " + MyFracToString(Normalize(f)));
-            Console.WriteLine("With Int Part: " + ToStringWithIntPart(f));
-            Console.WriteLine("Double Value: " + DoubleValue(f));
+            long num = Input("Введіть чисельник 1 числа: ");
+            
+            long denom1 = Input("Введіть знаменник 1 числа: ");
+            
+            if(CheckDenom(denom1)) return;
 
-            Console.Write("Чисельник 2 числа: ");
-            long num2 = long.Parse(Console.ReadLine());
-            Console.Write("Знаменник 2 числа: ");
-            long denom2 = long.Parse(Console.ReadLine());
+            MyFrac f = new MyFrac(num, denom1);
+
+            Console.WriteLine($"""
+            Введене число: {MyFracToString(f)}
+            Normalized: {MyFracToString(Normalize(f))}
+            З цілою частиною: {ToStringWithIntPart(f)}
+            Дійсне значення: {DoubleValue(f)}
+
+            """);
+            long num2 = Input("Введіть чисельник 2 числа: ");
+
+            long denom2 = Input("Введіть знаменник 2 числа: ");
+
+            if (CheckDenom(denom2)) return;
+
             MyFrac f2 = new MyFrac(num2, denom2);
             Console.WriteLine("Sum: " + MyFracToString(Normalize(Plus(f, f2))));
+            Console.WriteLine("Diff: " + MyFracToString(Normalize(Minus(f, f2))));
+            Console.WriteLine("Mult: " + MyFracToString(Normalize(Multiply(f, f2))));
+            Console.WriteLine("Div: " + MyFracToString(Normalize(Divide(f, f2))));
 
-            Console.Write("Введіть число n: ");
-            int n = int.Parse(Console.ReadLine());
             Console.WriteLine("Expr1 (" + n + "): " + MyFracToString(Normalize(CalcExpr1(n))));
             Console.WriteLine("Expr2 (" + n + "): " + MyFracToString(Normalize(CalcExpr2(n))));
         }
@@ -91,7 +99,7 @@ namespace Excercise1
 
         static MyFrac Divide(MyFrac f1, MyFrac f2) => new MyFrac(f1.nom * f2.denom, f1.denom * f2.nom);
 
-        static MyFrac CalcExpr1(int n)
+        static MyFrac CalcExpr1(long n)
         {
             MyFrac result = new MyFrac(0, 1);
             for (int i = 1; i <= n; i++)
@@ -103,7 +111,7 @@ namespace Excercise1
             return result;
         }
 
-        static MyFrac CalcExpr2(int n)
+        static MyFrac CalcExpr2(long n)
         {
             MyFrac result = new MyFrac(1, 1);
             for (int i = 2; i <= n; i++)
